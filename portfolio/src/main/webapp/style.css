@@ -2,6 +2,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 650px;
+  text-align: center;
 }
 
 #greeting-container {
@@ -27,12 +28,7 @@ p {
   font-family: sans-serif;    
 }
 
-button {
-  text-align: center;
-  font-family: sans-serif;
-}
-
-id {
+#fact-container {
   text-align: center;
   font-family: sans-serif;
 }
