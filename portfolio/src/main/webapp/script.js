@@ -26,3 +26,10 @@ function addRandomFunFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
+
+/**
+ * Fetches data from server and adds it to data page.
+ */
+function onloader(){
+  document.getElementById("Introduction").innerHTML = fetch('/data').then(response => response.text()));
+}
