@@ -27,9 +27,20 @@ function addRandomFunFact() {
   factContainer.innerText = fact;
 }
 
+function getRandomGreeting() {
+    const greetings =
+      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+
+    // Pick a random greeting.
+    var greeting = greetings[Math.floor(Math.random() * greetings.length)];
+    return greeting;
+}
+
 /**
- * Fetches data from server and adds it to data page.
+ * Fetches data from server and adds it to home page.
  */
 function onloader(){
-  document.getElementById("Introduction").innerHTML = fetch('/data').then(response => response.text());
+  fetch("/data").then(response => response.json()).then((infoAboutMe) => {
+    document.getElementById("Introduction").append(`${getRandomGreeting()} ${infoAboutMe[0]} ${infoAboutMe[1]} ${infoAboutMe[2]}`)
+  });
 }
