@@ -27,13 +27,23 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   private ArrayList<String> infoAboutMe = new ArrayList<String>();
-  infoAboutMe.add("My name is Awad.");
-  infoAboutMe.add("I'm 19 years old.");
-  infoAboutMe.add("I'm a STEP Intern for Google.");
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Awad!</h1>");
+    //populate list
+    infoAboutMe.add("My name is Awad.");
+    infoAboutMe.add("I'm 19 years old.");
+    infoAboutMe.add("I'm a STEP Intern for Google.");
+    String jsonInfo = convertToJsonUsingGson();
+    //sends Json as the response
+    response.setContentType("application/json;");
+    response.getWriter().println(jsonInfo);
+
   }
+
+  private String convertToJsonUsingGson(){
+    Gson gson = new Gson();
+    return gson.toJson(infoAboutMe);
+  }
+
 }
