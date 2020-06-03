@@ -42,9 +42,8 @@ function getRandomGreeting() {
  * Prints the given array in a readable string format.
  */
 function printInfoAboutMe(myInfo){
-  let index;
   let initialInfo = "";
-  for(index = 0; index < myInfo.length; index++){
+  for(let index=0; index<myInfo.length; index++){
     initialInfo += myInfo[index] + " ";
   }
   return initialInfo;
