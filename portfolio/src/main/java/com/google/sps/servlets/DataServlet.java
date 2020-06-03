@@ -47,21 +47,19 @@ public class DataServlet extends HttpServlet {
     infoAboutMe.clear();
   }
 
-  // This function handles user comments whenever the user hits the "submit" button the webpage.
+  // This function handles user comments whenever the user hits the "submit" button on the webpage.
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     String text = request.getParameter("text-input");
     userComments.add(text);
-    // Print contents on data page
-    response.setContentType("text/html;");
-    response.getWriter().println(userComments);
+    // Send the user back to the page after submitting a comment
+    response.sendRedirect("/index.html");
   }
 
   // Converts our array to json format using gson library
   private String convertToJsonUsingGson(){
     return gson.toJson(infoAboutMe);
   }
-
 
 }
