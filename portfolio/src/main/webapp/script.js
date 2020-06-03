@@ -26,7 +26,9 @@ function addRandomFunFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
-
+/**
+ * Returns a greeting in different languagues randomly.
+ */
 function getRandomGreeting() {
     const greetings =
       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
@@ -37,10 +39,22 @@ function getRandomGreeting() {
 }
 
 /**
+ * Prints the given array in a readable string format.
+ */
+function printInfoAboutMe(myInfo){
+  let index;
+  let initialInfo = "";
+  for(index = 0; index < myInfo.length; index++){
+    initialInfo += myInfo[index] + " ";
+  }
+  return initialInfo;
+}
+
+/**
  * Fetches data from server and adds it to home page.
  */
 function onloader(){
   fetch("/data").then(response => response.json()).then((infoAboutMe) => {
-    document.getElementById("Introduction").append(`${getRandomGreeting()} ${infoAboutMe[0]} ${infoAboutMe[1]} ${infoAboutMe[2]}`)
+    document.getElementById("Introduction").append(`${getRandomGreeting()} ${printInfoAboutMe(infoAboutMe)}`);
   });
 }

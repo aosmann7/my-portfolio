@@ -28,7 +28,10 @@ public class DataServlet extends HttpServlet {
 
   // List that will store info about me
   private ArrayList<String> infoAboutMe = new ArrayList<String>();
-
+  // Our internal Gson object
+  private Gson gson = new Gson();
+  
+  // This function runs whenever the /data url is requested. 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Populate list
@@ -39,10 +42,11 @@ public class DataServlet extends HttpServlet {
     // Sends Json as the response
     response.setContentType("application/json;");
     response.getWriter().println(jsonInfo);
+    infoAboutMe.clear();
   }
 
+  // Converts our array to json format using gson library
   private String convertToJsonUsingGson(){
-    Gson gson = new Gson();
     return gson.toJson(infoAboutMe);
   }
 
