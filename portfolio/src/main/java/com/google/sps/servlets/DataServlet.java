@@ -14,7 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +26,28 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  // List that will store info about me
+  private ArrayList<String> infoAboutMe = new ArrayList<String>();
+  // Our internal Gson object
+  private Gson gson = new Gson();
+  
+  // This function runs whenever the /data url is requested. 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Awad!</h1>");
+    // Populate list
+    infoAboutMe.add("My name is Awad.");
+    infoAboutMe.add("I'm 19 years old.");
+    infoAboutMe.add("I'm a STEP Intern for Google.");
+    String jsonInfo = convertToJsonUsingGson();
+    // Sends Json as the response
+    response.setContentType("application/json;");
+    response.getWriter().println(jsonInfo);
+    infoAboutMe.clear();
   }
+
+  // Converts our array to json format using gson library
+  private String convertToJsonUsingGson(){
+    return gson.toJson(infoAboutMe);
+  }
+
 }

@@ -26,10 +26,34 @@ function addRandomFunFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
+/**
+ * Returns a greeting in different languagues randomly.
+ */
+function getRandomGreeting() {
+    const greetings =
+      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+
+    // Pick a random greeting.
+    var greeting = greetings[Math.floor(Math.random() * greetings.length)];
+    return greeting;
+}
 
 /**
- * Fetches data from server and adds it to data page.
+ * Prints the given array in a readable string format.
+ */
+function printInfoAboutMe(myInfo){
+  let initialInfo = "";
+  for(let index=0; index<myInfo.length; index++){
+    initialInfo += myInfo[index] + " ";
+  }
+  return initialInfo;
+}
+
+/**
+ * Fetches data from server and adds it to home page.
  */
 function onloader(){
-  document.getElementById("Introduction").innerHTML = fetch('/data').then(response => response.text());
+  fetch("/data").then(response => response.json()).then((infoAboutMe) => {
+    document.getElementById("Introduction").append(`${getRandomGreeting()} ${printInfoAboutMe(infoAboutMe)}`);
+  });
 }
