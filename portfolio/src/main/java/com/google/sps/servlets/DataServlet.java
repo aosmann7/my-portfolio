@@ -40,10 +40,11 @@ public class DataServlet extends HttpServlet {
     infoAboutMe.add("My name is Awad.");
     infoAboutMe.add("I'm 19 years old.");
     infoAboutMe.add("I'm a STEP Intern for Google.");
-    String jsonInfo = convertToJsonUsingGson();
+    // Converts our arraylists to Json format
+    String jsonInfo = convertToJsonUsingGson(infoAboutMe);
+    String jsonUserComments = convertToJsonUsingGson(userComments);
     // Sends Json as the response
     response.setContentType("application/json;");
-    response.getWriter().println(jsonInfo);
     infoAboutMe.clear();
   }
 
@@ -58,8 +59,8 @@ public class DataServlet extends HttpServlet {
   }
 
   // Converts our array to json format using gson library
-  private String convertToJsonUsingGson(){
-    return gson.toJson(infoAboutMe);
+  private String convertToJsonUsingGson(ArrayList<String> info){
+    return gson.toJson(info);
   }
 
 }
