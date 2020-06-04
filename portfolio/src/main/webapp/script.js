@@ -41,6 +41,7 @@ function getRandomGreeting() {
 /**
  * Constructs the given array in a readable format for html page.
  */
+
 function printUserComments(comments){
   for(let index = 0; index < comments.length; index++){
     var commentHolder = document.createElement("li");
