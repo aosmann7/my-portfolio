@@ -29,6 +29,16 @@ p {
   font-family: sans-serif;    
 }
 
+ol {
+  text-align: center;  
+  list-style-position: inside;
+  font-size: 24px;   
+}
+
+.SubmitButton{
+  text-align: center; 
+}
+
 #fact-container {
   text-align: center;
   font-family: sans-serif;
@@ -54,4 +64,3 @@ p {
 .fa-github {
   color: white;
 }
-

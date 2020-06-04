@@ -39,22 +39,24 @@ function getRandomGreeting() {
 }
 
 /**
- * Prints the given array in a readable string format.
+ * Constructs the given array in a readable format for html page.
+ * @param {Array} - the list of comments
  */
-function printInfoAboutMe(myInfo){
-  let index;
-  let initialInfo = "";
-  for(index = 0; index < myInfo.length; index++){
-    initialInfo += myInfo[index] + " ";
+function printUserComments(comments){
+  for(let index = 0; index < comments.length; index++){
+    var commentHolder = document.createElement("li");
+    var comment = document.createTextNode(`${comments[index]}`);
+    commentHolder.appendChild(comment);
+    document.getElementById('Comments').appendChild(commentHolder);
   }
-  return initialInfo;
 }
 
 /**
  * Fetches data from server and adds it to home page.
  */
 function onloader(){
-  fetch("/data").then(response => response.json()).then((infoAboutMe) => {
-    document.getElementById("Introduction").append(`${getRandomGreeting()} ${printInfoAboutMe(infoAboutMe)}`);
+  document.getElementById("Introduction").append(`${getRandomGreeting()} My name is Awad. I'm 19 years old.`);
+  fetch("/data").then(response => response.json()).then((userComments) => {
+    printUserComments(userComments);
   });
 }
