@@ -26,8 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  // List that will store info about me
-  private ArrayList<String> infoAboutMe = new ArrayList<String>();
   // Internal list that will store user comments
   private ArrayList<String> userComments = new ArrayList<String>();
   // Our internal Gson object
@@ -36,16 +34,11 @@ public class DataServlet extends HttpServlet {
   // This function runs whenever the /data url is requested. 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Populate list
-    infoAboutMe.add("My name is Awad.");
-    infoAboutMe.add("I'm 19 years old.");
-    infoAboutMe.add("I'm a STEP Intern for Google.");
     // Converts our arraylists to Json format
-    String jsonInfo = convertToJsonUsingGson(infoAboutMe);
     String jsonUserComments = convertToJsonUsingGson(userComments);
     // Sends Json as the response
     response.setContentType("application/json;");
-    infoAboutMe.clear();
+    response.getWriter().println(jsonUserComments);
   }
 
   // This function handles user comments whenever the user hits the "submit" button on the webpage.
