@@ -42,6 +42,7 @@ function getRandomGreeting() {
  * Constructs the given array in a readable format for html page.
  * @param {Array} - the list of comments
  */
+
 function printUserComments(comments){
   for(let index = 0; index < comments.length; index++){
     var commentHolder = document.createElement("li");
