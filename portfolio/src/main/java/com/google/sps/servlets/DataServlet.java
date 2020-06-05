@@ -51,6 +51,7 @@ public class DataServlet extends HttpServlet {
         userComments.add(userComment);
       }
     }
+
     // Converts our arraylists to Json format
     String jsonUserComments = convertToJsonUsingGson(userComments);
     // Sends Json as the response
