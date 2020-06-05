@@ -51,10 +51,12 @@ function printUserComments(comments){
   }
 }
 
+/**
+ * Deletes user comments from datastore and page.
+ */
 function deleteUserComments(){
   fetch('/delete-comment', {method: 'POST'});
   location.reload();
-  onloader();
 }
 /**
  * Fetches data from server and adds it to home page.
@@ -65,3 +67,5 @@ function deleteUserComments(){
     printUserComments(userComments);
   });
 }
+
+window.onload = onloader;

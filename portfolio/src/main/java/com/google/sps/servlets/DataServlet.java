@@ -47,9 +47,7 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable()) {
       String userComment = (String) entity.getProperty("comment");
       // Check if the entity already has the comment to avoid printing comments more than it should.
-      if (!userComments.contains(userComment)){
-        userComments.add(userComment);
-      }
+      userComments.add(userComment);
     }
     // Converts our arraylists to Json format
     String jsonUserComments = convertToJsonUsingGson(userComments);
@@ -62,8 +60,12 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
-    String text = request.getParameter("text-input");
+    String text = getParameter(request,"text-input", "");
     long timestamp = System.currentTimeMillis();
+    if (text.length() == 0){
+      response.sendRedirect("/index.html");
+      return;
+    }
     // Creates our comment entity within datastore
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("comment", text);
@@ -82,7 +84,6 @@ public class DataServlet extends HttpServlet {
   /**
    * Gets the data associated with the given parameter, null if parameter is not found
    */
-   /*
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     if (value == null) {
@@ -90,5 +91,4 @@ public class DataServlet extends HttpServlet {
     }
     return value;
   }
-  */
 }
