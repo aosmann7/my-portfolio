@@ -46,7 +46,6 @@ public class DataServlet extends HttpServlet {
     ArrayList<String> userComments = new ArrayList<String>();
     for (Entity entity : results.asIterable()) {
       String userComment = (String) entity.getProperty("comment");
-      // Check if the entity already has the comment to avoid printing comments more than it should.
       userComments.add(userComment);
     }
 
@@ -63,6 +62,7 @@ public class DataServlet extends HttpServlet {
     // Get the input from the form.
     String text = getParameter(request,"text-input", "");
     long timestamp = System.currentTimeMillis();
+    // Check for empty comment
     if (text.length() == 0){
       response.sendRedirect("/index.html");
       return;
