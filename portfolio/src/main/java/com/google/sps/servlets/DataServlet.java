@@ -34,8 +34,6 @@ public class DataServlet extends HttpServlet {
 
   // Our internal Gson object
   private Gson gson = new Gson();
-  // Our list of comments.
-  private ArrayList<String> userComments = new ArrayList<String>();
   
   // This function runs whenever the /data url is requested. 
   @Override
@@ -44,8 +42,11 @@ public class DataServlet extends HttpServlet {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+    // Our list of comments.
+    ArrayList<String> userComments = new ArrayList<String>();
     for (Entity entity : results.asIterable()) {
       String userComment = (String) entity.getProperty("comment");
+      // Check if the entity already has the comment to avoid printing comments more than it should.
       if (!userComments.contains(userComment)){
         userComments.add(userComment);
       }

@@ -51,6 +51,11 @@ function printUserComments(comments){
   }
 }
 
+function deleteUserComments(){
+  fetch('/delete-comment', {method: 'POST'});
+  location.reload();
+  onloader();
+}
 /**
  * Fetches data from server and adds it to home page.
  */
