@@ -43,7 +43,7 @@ function getRandomGreeting() {
  * @param {Array} - the list of comments
  */
 function printUserComments(comments){
-  for(let index = 0; index < comments.length; index++){
+  for(let index=0; index<comments.length; index++){
     var commentHolder = document.createElement("li");
     var comment = document.createTextNode(`${comments[index]}`);
     commentHolder.appendChild(comment);
@@ -52,11 +52,20 @@ function printUserComments(comments){
 }
 
 /**
+ * Deletes user comments from datastore and page.
+ */
+function deleteUserComments(){
+  fetch('/delete-comment', {method: 'POST'});
+  location.reload();
+}
+/**
  * Fetches data from server and adds it to home page.
  */
-function onloader(){
+ function onloader(){
   document.getElementById("Introduction").append(`${getRandomGreeting()} My name is Awad. I'm 19 years old.`);
-  fetch("/data").then(response => response.json()).then((userComments) => {
+  fetch('/data').then(response => response.json()).then((userComments) => {
     printUserComments(userComments);
   });
 }
+
+window.onload = onloader;
