@@ -49,6 +49,7 @@ public class DataServlet extends HttpServlet {
       // Check if the entity already has the comment to avoid printing comments more than it should.
       userComments.add(userComment);
     }
+
     // Converts our arraylists to Json format
     String jsonUserComments = convertToJsonUsingGson(userComments);
     // Sends Json as the response
