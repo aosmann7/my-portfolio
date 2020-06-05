@@ -17,6 +17,9 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,14 +32,24 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  // Internal list that will store user comments
-  private ArrayList<String> userComments = new ArrayList<String>();
   // Our internal Gson object
   private Gson gson = new Gson();
+  // Our list of comments.
+  private ArrayList<String> userComments = new ArrayList<String>();
   
   // This function runs whenever the /data url is requested. 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Gets comments from datastore
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+    for (Entity entity : results.asIterable()) {
+      String userComment = (String) entity.getProperty("comment");
+      if (!userComments.contains(userComment)){
+        userComments.add(userComment);
+      }
+    }
     // Converts our arraylists to Json format
     String jsonUserComments = convertToJsonUsingGson(userComments);
     // Sends Json as the response
@@ -49,10 +62,11 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     String text = request.getParameter("text-input");
-    userComments.add(text);
-    // Comment entity
+    long timestamp = System.currentTimeMillis();
+    // Creates our comment entity within datastore
     Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("text-input", text);
+    commentEntity.setProperty("comment", text);
+    commentEntity.setProperty("timestamp", timestamp);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
     // Send the user back to the page after submitting a comment
@@ -64,4 +78,16 @@ public class DataServlet extends HttpServlet {
     return gson.toJson(info);
   }
 
+  /**
+   * Gets the data associated with the given parameter, null if parameter is not found
+   */
+   /*
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+  */
 }
