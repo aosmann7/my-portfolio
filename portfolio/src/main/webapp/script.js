@@ -66,6 +66,7 @@ function onloader(){
   fetch('/data').then(response => response.json()).then((userComments) => {
     printUserComments(userComments);
   });
+  createMap();
 }
 /**
  * Creates a map and adds it to the page.
