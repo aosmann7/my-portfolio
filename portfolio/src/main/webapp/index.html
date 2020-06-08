@@ -5,9 +5,11 @@
     <title>Awad Osman</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB59P0iF2uNA3k7SRJb2mDf8aNgrbKpWig&callback=initMap"
+  type="text/javascript"></script>
     <script src="script.js"></script>
   </head>
-  <body onload = "onloader()">
+  <body onload = "onloader();">
     <div id="content">
 
       <h1 id="Introduction"></h1>
@@ -62,6 +64,15 @@
         <ol id="Comments">
         </ol>
       <button onclick="deleteUserComments()">Delete your comments</button>
+      <button>Translate your comment!</button>
+
+      <hr>
+
+      <h2>Maps!</h2>
+        <div id="map"></div>
+        <p>Look at the world!</p>
+    
+      <hr>
     </div>
   </body>
 </html>

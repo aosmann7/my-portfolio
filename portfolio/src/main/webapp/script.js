@@ -61,11 +61,18 @@ function deleteUserComments(){
 /**
  * Fetches data from server and adds it to home page.
  */
- function onloader(){
+function onloader(){
   document.getElementById("Introduction").append(`${getRandomGreeting()} My name is Awad. I'm 19 years old.`);
   fetch('/data').then(response => response.json()).then((userComments) => {
     printUserComments(userComments);
   });
+  createMap();
+}
+/**
+ * Creates a map and adds it to the page.
+ */
+function createMap(){
+  const myMap = new google.maps.Map(document.getElementById("map"), {center: {lat: 37.422, lng: -122.084}, zoom: 16});
 }
 
 window.onload = onloader;
