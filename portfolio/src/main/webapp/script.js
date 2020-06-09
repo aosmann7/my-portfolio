@@ -107,7 +107,9 @@ function createMarkers(myMap){
   createInfoWindows(myMap, DCMarker, "DC is about 20 minutes from my house. Main attractions here are the White House, Lincoln Memorial, 9-11 Memorial, and the US Monument.");
 
 }
-
+/**
+ * Adds Info Windows for markers.
+ */
 function createInfoWindows(map, marker, description){
   const infoWindow = new google.maps.InfoWindow({content: description});
   marker.addListener("click", () => {infoWindow.open(map, marker);});
