@@ -72,7 +72,28 @@ function onloader(){
  * Creates a map and adds it to the page.
  */
 function createMap(){
-  const myMap = new google.maps.Map(document.getElementById("map"), {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+  const homeTown = {lat: 38.7043, lng: -77.2278};
+  const myMap = new google.maps.Map(document.getElementById("map"), {center: homeTown, zoom: 16});
+  const homeTownMarker = new google.maps.Marker({position: homeTown, map: myMap, title: "My Hometown!"});
+  createMarkers(myMap);
+}
+/**
+ * Creates markers of all major cities I've been to and adds to page.
+ */
+function createMarkers(myMap){
+  const ethiopiaMarker = new google.maps.Marker({position: {lat: 8.9806, lng: 38.7578}, map: myMap, title: "My Heritage!"});
+  const dubaiMarker = new google.maps.Marker({position: {lat: 25.2048, lng: 55.2708 }, map: myMap, title: "Vacation!"});
+  const jeddahMarker = new google.maps.Marker({position: {lat: 21.4858, lng: 39.1925 }, map: myMap, title: "Visiting an Uncle for the first time!"});
+  const bramptonMarker = new google.maps.Marker({position: {lat: 43.7315, lng: -79.7624 }, map: myMap, title: "First time travelling outside the U.S!"});
+  const sanFranMarker = new google.maps.Marker({position: {lat: 37.7749, lng: -122.4194 }, map: myMap, title: "First time travelling to west coast!"});
+  const sanDiegoMarker = new google.maps.Marker({position: {lat: 32.7157, lng: -117.1611 }, map: myMap, title: "Beautiful Beaches here!"});
+  const LAMarker = new google.maps.Marker({position: {lat: 34.0522, lng: -118.2437 }, map: myMap});
+  const manhattanMarker = new google.maps.Marker({position: {lat: 40.7831, lng: -73.9712 }, map: myMap});
+  const orlandoMarker = new google.maps.Marker({position: {lat: 28.5383, lng: -81.3792 }, map: myMap});
+  const myrtleBeachMarker = new google.maps.Marker({position: {lat: 33.6891, lng: -78.8867 }, map: myMap});
+  const DCMarker = new google.maps.Marker({position: {lat: 38.9072, lng: -77.0369 }, map: myMap});
+  const baltimoreMarker = new google.maps.Marker({position: {lat: 39.2904, lng: -76.6122 }, map: myMap});
+
 }
 
 window.onload = onloader;
