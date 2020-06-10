@@ -74,7 +74,6 @@ function onloader(){
       alert(error);
   });
   createMap();
-  //drawChart();
 }
 /**
  * Creates a map and adds it to the page.
