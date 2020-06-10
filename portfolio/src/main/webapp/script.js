@@ -84,8 +84,11 @@ function createMap(){
   const myMap = new google.maps.Map(
       document.getElementById("map"), 
       {center: homeTown, zoom: 1});
-  const homeTownMarker = new google.maps.Marker(
-      {position: homeTown, map: myMap, title: "My Hometown!"});
+  const homeTownMarker = new google.maps.Marker({
+      position: homeTown, 
+      map: myMap, 
+      title: "My Hometown!"
+  });
   const infoWindow = new google.maps.InfoWindow({content: "My hometown for the past 11 years. A quiet city with no attractions really other than George Mason's home."});
   homeTownMarker.addListener("click", () => {
       infoWindow.open(myMap, homeTownMarker);
@@ -141,7 +144,7 @@ function createMarkers(myMap){
       marker: new google.maps.Marker({position: {lat: 38.9072, lng: -77.0369 }, map: myMap}),
       description: "DC is about 20 minutes from my house. Main attractions here are the White House, Lincoln Memorial, 9-11 Memorial, and the US Monument."
     },
-  ]
+  ];
 
   for (let index=0; index<myMarkers.length; index++){
     createInfoWindows(myMap, myMarkers[index].marker, myMarkers[index].description);
@@ -149,6 +152,9 @@ function createMarkers(myMap){
 }
 /**
  * Adds Info Windows for markers.
+ * @param {map} map - Our google map.
+ * @param {marker} marker - The marker we want to attach an info window to.
+ * @param {string} description - The description of the marker.
  */
 function createInfoWindows(map, marker, description){
   const infoWindow = new google.maps.InfoWindow({content: description});
@@ -160,22 +166,33 @@ function createInfoWindows(map, marker, description){
 /** Creates a chart and adds it to the page. */
 function drawChart() {
   const data = new google.visualization.DataTable();
-  data.addColumn('string', 'Animal');
-  data.addColumn('number', 'Count');
+  data.addColumn('string', 'Island');
+  data.addColumn('number', 'count');
   data.addRows([
-    ['Lions', 10],
-    ['Tigers', 5],
-    ['Bears', 15]
+    ['Maui, Hawaii', 88.32],
+    ['Santorini, Greece', 88.53],
+    ['Galapagos Islands, Ecuador', 88.73],
+    ['Fiji Islands', 89.18],
+    ['Paros, Greece', 89.37],
+    ['Azores, Portugal', 89.77],
+    ['Koh Lanta, Thailand', 90],
+    ['Cape Breton Island, Nova Scotia, Canada', 90.06],
+    ['Crete, Greece', 90.12],
+    ['Anguila', 90.28],
+    ['Maldives', 90.48],
+    ['Milos, Greece', 90.50],
+    ['Bali, Indonesia', 90.76],
+    ['Palawan, Philippines', 90.87],
+    ['Sri Lanka', 92.12]
   ]);
 
   const options = {
-    'title': 'Zoo Animals',
+    'title': 'Best Islands to Visit',
     'width':500,
     'height':400
   };
 
-  const chart = new google.visualization.PieChart(
-      document.getElementById("chart"));
+  const chart = new google.visualization.PieChart(document.getElementById("chart"));
   chart.draw(data, options);
 }
 
