@@ -162,8 +162,9 @@ function createInfoWindows(map, marker, description){
       infoWindow.open(map, marker);
   });
 }
-
-/** Creates a chart and adds it to the page. */
+/**
+ * Creates chart and adds it to page.
+ */
 function drawChart() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Island');
