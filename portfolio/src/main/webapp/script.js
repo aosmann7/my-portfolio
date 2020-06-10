@@ -65,6 +65,8 @@ function onloader(){
   document.getElementById("Introduction").append(`${getRandomGreeting()} My name is Awad. I'm 19 years old.`);
   fetch('/data').then(response => response.json()).then((userComments) => {
     printUserComments(userComments);
+  }).catch(error => {
+      alert(error);
   });
   createMap();
 }
