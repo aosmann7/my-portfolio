@@ -78,8 +78,11 @@ function createMap(){
   const myMap = new google.maps.Map(
       document.getElementById("map"), 
       {center: homeTown, zoom: 1});
-  const homeTownMarker = new google.maps.Marker(
-      {position: homeTown, map: myMap, title: "My Hometown!"});
+  const homeTownMarker = new google.maps.Marker({
+      position: homeTown, 
+      map: myMap, 
+      title: "My Hometown!"
+  });
   const infoWindow = new google.maps.InfoWindow({content: "My hometown for the past 11 years. A quiet city with no attractions really other than George Mason's home."});
   homeTownMarker.addListener("click", () => {
       infoWindow.open(myMap, homeTownMarker);
@@ -135,7 +138,7 @@ function createMarkers(myMap){
       marker: new google.maps.Marker({position: {lat: 38.9072, lng: -77.0369 }, map: myMap}),
       description: "DC is about 20 minutes from my house. Main attractions here are the White House, Lincoln Memorial, 9-11 Memorial, and the US Monument."
     },
-  ]
+  ];
 
   for (let index=0; index<myMarkers.length; index++){
     createInfoWindows(myMap, myMarkers[index].marker, myMarkers[index].description);
@@ -143,11 +146,14 @@ function createMarkers(myMap){
 }
 /**
  * Adds Info Windows for markers.
+ * @param {map} map - Our google map.
+ * @param {marker} marker - The marker we want to attach an info window to.
+ * @param {string} description - The description of the marker.
  */
 function createInfoWindows(map, marker, description){
   const infoWindow = new google.maps.InfoWindow({content: description});
   marker.addListener("click", () => {
-      infoWindow.open(map, marker);
+    infoWindow.open(map, marker);
   });
 }
 
