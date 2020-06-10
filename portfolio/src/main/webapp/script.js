@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+
 /**
  * Adds a random fun fact to the page.
  */
@@ -69,6 +74,7 @@ function onloader(){
       alert(error);
   });
   createMap();
+  //drawChart();
 }
 /**
  * Creates a map and adds it to the page.
@@ -150,5 +156,28 @@ function createInfoWindows(map, marker, description){
       infoWindow.open(map, marker);
   });
 }
+
+/** Creates a chart and adds it to the page. */
+function drawChart() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Animal');
+  data.addColumn('number', 'Count');
+  data.addRows([
+    ['Lions', 10],
+    ['Tigers', 5],
+    ['Bears', 15]
+  ]);
+
+  const options = {
+    'title': 'Zoo Animals',
+    'width':500,
+    'height':400
+  };
+
+  const chart = new google.visualization.PieChart(
+      document.getElementById("chart"));
+  chart.draw(data, options);
+}
+
 
 window.onload = onloader;
