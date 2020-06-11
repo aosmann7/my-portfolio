@@ -167,7 +167,7 @@ function createInfoWindows(map, marker, description){
 function drawChart() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Island');
-  data.addColumn('number', 'count');
+  data.addColumn('number', 'averages');
   data.addRows([
     ['Maui, Hawaii', 88.32],
     ['Santorini, Greece', 88.53],
