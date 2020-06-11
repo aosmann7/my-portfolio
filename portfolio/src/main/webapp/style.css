@@ -71,3 +71,8 @@ ol {
   width: 500px;
   margin: auto;
 }
+
+#chart {
+  display: inline-block;
+  margin: auto;
+}
