@@ -18,10 +18,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    //throw new UnsupportedOperationException("TODO: Implement this method.");
     ArrayList<TimeRange> openTimes = new ArrayList<TimeRange>();
 
     // Edge case when a meeting is longer than a full day.
@@ -49,10 +47,9 @@ public final class FindMeetingQuery {
         // Move start pointer to after the event too keep track of an open time.
         dayStart = event.getWhen().end();
         continue;
-
         
       } 
-      // If the theoretical start is in the middle of the event, move theoretical start to after the event.
+      // If the start pointer is in the middle of the event, move the start pointer to after the event.
       else if (dayStart < event.getWhen().end()) {
         dayStart = event.getWhen().end();
         continue;
