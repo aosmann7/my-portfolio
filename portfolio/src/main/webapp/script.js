@@ -158,7 +158,7 @@ function createMarkers(myMap){
 function createInfoWindows(map, marker, description){
   const infoWindow = new google.maps.InfoWindow({content: description});
   marker.addListener("click", () => {
-      infoWindow.open(map, marker);
+    infoWindow.open(map, marker);
   });
 }
 /**
