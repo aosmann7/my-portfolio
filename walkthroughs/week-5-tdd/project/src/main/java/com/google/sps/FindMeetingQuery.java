@@ -24,11 +24,11 @@ public final class FindMeetingQuery {
     ArrayList<Event> eventList = new ArrayList(events);
     Collections.sort(eventList, (Event e1, Event e2) -> TimeRange.ORDER_BY_START.compare(e1.getWhen(), e2.getWhen()));
     
-    Collection<TimeRange> optionalOpenTimes = getOpenTimes(eventList, request, true);
-    Collection<TimeRange> requiredOpenTimes = getOpenTimes(eventList, request, false);
+    Collection<TimeRange> optionalIncludedOpenTimes = getOpenTimes(eventList, request, /* optionalAttendees= */ true);
+    Collection<TimeRange> requiredOpenTimes = getOpenTimes(eventList, request, /* optionalAttendees= */ false);
 
-    if (optionalOpenTimes.size() > 0) {
-      return optionalOpenTimes;
+    if (optionalIncludedOpenTimes.size() > 0) {
+      return optionalIncludedOpenTimes;
     } 
     else if (request.getAttendees().size() > 0) {
       return requiredOpenTimes;
@@ -36,8 +36,6 @@ public final class FindMeetingQuery {
     else {
       return Collections.emptyList();
     }
-
-    
   }
 
   /**
@@ -65,12 +63,10 @@ public final class FindMeetingQuery {
       if (optionalAttendees){
         if (noRequiredMembers && noOptionalMembers){
           continue;
-        }
+        }     
       }
-      else {
-        if (noRequiredMembers){
-          continue;
-        }
+      else if (noRequiredMembers) {
+        continue;
       }
 
       if (dayStart < event.getWhen().start()) {
