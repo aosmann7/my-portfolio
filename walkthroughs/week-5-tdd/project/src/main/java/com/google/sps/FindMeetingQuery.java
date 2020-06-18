@@ -46,7 +46,6 @@ public final class FindMeetingQuery {
 
         // Move start pointer to after the event too keep track of an open time.
         dayStart = event.getWhen().end();
-        
       } 
       // If the start pointer is in the middle of the event (for overlap), move the start pointer to after the event.
       else if (dayStart < event.getWhen().end()) {
